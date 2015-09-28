@@ -36,7 +36,16 @@ public class SoundLocationActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                    ShowProgressBar(5000);
+               //Start the audio record
+                AudioRecordTest audioRecordTest = new AudioRecordTest();
+                audioRecordTest.startRecording();
+                //Show progress bar for 5000 milliseconds while recording
+                //Pass audioRecordTest to stop recording after post delayed 5 secs
+                ShowProgressBar(5000, audioRecordTest);
+
+
+
+
 
             }
         });
@@ -68,7 +77,7 @@ public class SoundLocationActivity extends ActionBarActivity {
 
 
     //FUNCTION TO SHOW A PROGRESS BAR DURING RECORDING
-    void ShowProgressBar(int milliseconds) {
+    void ShowProgressBar(int milliseconds, final AudioRecordTest audioRecordTest) {
         final ProgressBar progressBar = new ProgressBar(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -77,10 +86,22 @@ public class SoundLocationActivity extends ActionBarActivity {
         alert.setView(progressBar);
         alert.show();
         Handler handler = new Handler();
-        //Delays the handler  for 3500ms
+        final Intent intent = new Intent(this,SuccessActivity.class);
+
+        final Intent recordIntent = new Intent(this, AudioRecordTest.class);
+
+
+
+        //Delays the handler  for X milliseconds and stop the recording
         handler.postDelayed(new Runnable() {
             public void run() {
+
+                //TODO: Validate successful capture
+                startActivity(intent);
+                audioRecordTest.stopRecording();
                 alert.dismiss();
+
+
             }
         }, milliseconds);
 

@@ -16,53 +16,19 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp"
+        android:paddingBottom="30dp"
         android:id="@+id/textView_location_of_sound" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Front"
-        android:id="@+id/radioButton_front"
-        android:layout_marginTop="30dp"
-        android:checked="false"
-        android:layout_below="@+id/textView_location_of_sound"
-        android:layout_alignLeft="@+id/textView_location_of_sound"
-        android:layout_alignStart="@+id/textView_location_of_sound" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mid"
-        android:id="@+id/radioButton_mid"
-        android:checked="false"
-        android:layout_alignTop="@+id/radioButton_front"
-        android:layout_alignRight="@+id/textView_location_of_sound"
-        android:layout_alignEnd="@+id/textView_location_of_sound"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rear"
-        android:id="@+id/radioButton_rear"
-        android:checked="false"
-        android:layout_alignTop="@+id/radioButton_mid"
-        android:layout_toRightOf="@+id/textView_location_of_sound"
-        android:layout_toEndOf="@+id/textView_location_of_sound"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/press_start"
 
-        android:layout_below="@+id/radioButton_front"
-        android:layout_alignLeft="@+id/radioButton_front"
-        android:layout_alignStart="@+id/radioButton_front"
         android:layout_marginTop="94dp"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:layout_below="@+id/textView_location_of_sound"
+        android:layout_alignLeft="@+id/textView_location_of_sound"
+        android:layout_alignStart="@+id/textView_location_of_sound" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -82,5 +48,40 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView_location_of_sound"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:id="@+id/radio_button_location">
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Front"
+            android:id="@+id/radioButton_front"
+            android:checked="false"
+            android:paddingRight="45dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mid"
+            android:id="@+id/radioButton_mid"
+            android:checked="false"
+            android:paddingLeft="45dp"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rear"
+            android:id="@+id/radioButton_rear"
+            android:checked="false" />
+    </RadioGroup>
 
 </RelativeLayout>

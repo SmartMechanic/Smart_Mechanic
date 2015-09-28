@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smart_mechanic.smartmechanic" >
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,12 +23,18 @@
         </activity>
         <activity
             android:name=".SoundLocationActivity"
-            android:label="@string/title_activity_sound_location_avtivity" >
+            android:label="@string/title_activity_sound_location_activity" >
         </activity>
         <activity
             android:name=".SuccessActivity"
             android:label="@string/title_activity_success" >
         </activity>
+
+        <activity
+            android:name=".AudioRecordTest"
+            android:label="@string/title_activity_success" >
+        </activity>
+
     </application>
 
 </manifest>

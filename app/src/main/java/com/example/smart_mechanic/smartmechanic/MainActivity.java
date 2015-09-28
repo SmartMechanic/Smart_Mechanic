@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -17,6 +18,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
+
+        //Variable to hide next button
+        boolean hide = true;
+        final ImageButton next = (ImageButton) findViewById(R.id.imageButton_continue);
+        next.setVisibility(View.INVISIBLE);
+
 
         //Populate the makes spinner
         Spinner makes_spinner = (Spinner) findViewById(R.id.make_spinner);
@@ -51,9 +58,25 @@ public class MainActivity extends ActionBarActivity {
         // Apply the adapter to the spinner
         years_spinner.setAdapter(years_adapter);
 
+        years_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch(position) {
+
+                    case (1):
+                        next.setVisibility(view.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         final Intent intent = new Intent(this, SoundLocationActivity.class);
-        ImageButton next = (ImageButton) findViewById(R.id.imageButton_continue);
+
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

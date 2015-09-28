@@ -14,15 +14,13 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:text="@string/successful"
-
-
         android:id="@+id/textView_successful" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="Conversion Result"
         android:id="@+id/textView_result"
         android:layout_marginTop="74dp"
         android:layout_marginRight="25dp"
@@ -36,12 +34,10 @@
         android:layout_height="wrap_content"
         android:text="@string/find_shop"
         android:id="@+id/textView_findShop"
-        android:layout_below="@+id/textView_result"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="147dp" />
+        android:layout_marginTop="135dp"
+        android:layout_below="@+id/textView_problem_explanation"
+        android:layout_toLeftOf="@+id/textView_result"
+        android:layout_toStartOf="@+id/textView_result" />
 
     <Button
         android:layout_width="wrap_content"
@@ -54,6 +50,15 @@
         android:layout_toStartOf="@+id/textView_result"
         android:layout_marginRight="20dp"
         android:layout_marginEnd="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="URL to explanation of problem"
+        android:id="@+id/textView_problem_explanation"
+        android:layout_below="@+id/textView_result"
+        android:layout_alignRight="@+id/textView_successful"
+        android:layout_alignEnd="@+id/textView_successful" />
 
 
 </RelativeLayout>

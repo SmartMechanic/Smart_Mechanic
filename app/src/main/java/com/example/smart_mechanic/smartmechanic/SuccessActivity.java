@@ -1,5 +1,7 @@
 package com.example.smart_mechanic.smartmechanic;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -16,11 +18,19 @@ public class SuccessActivity extends ActionBarActivity {
         setContentView(R.layout.activity_success);
 
 
+
+
         Button findShopButton = (Button)findViewById(R.id.button_findShop);
 
         findShopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Uri shopsURI = Uri.parse("geo:0,0?q=Automotive+Shop");
+                Intent intent = new Intent(Intent.ACTION_VIEW, shopsURI);
+                intent.setPackage("com.google.android.apps.maps");
+                startActivity(intent);
+
 
             }
         });
