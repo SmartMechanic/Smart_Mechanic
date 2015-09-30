@@ -29,13 +29,12 @@
            android:layout_width="fill_parent"
            android:layout_height="wrap_content"
            android:id="@+id/make_spinner"
-           android:layout_below="@+id/problems" 
-           android:layout_alignParentLeft="true"
-           android:layout_alignParentStart="true"
-           android:layout_marginTop="75dp"
+           android:layout_marginTop="48dp"
            android:paddingBottom = "35dp"
 
-           />
+           android:layout_below="@+id/problems"
+           android:layout_alignParentLeft="true"
+           android:layout_alignParentStart="true" />
 
        <Spinner
            android:layout_width="fill_parent"
@@ -52,7 +51,8 @@
            android:id="@+id/year_spinner"
            android:layout_alignParentLeft="true"
            android:layout_alignParentStart="true"
-           android:layout_below="@+id/model_spinner" />
+           android:layout_below="@+id/model_spinner"
+           android:paddingBottom = "30dp"/>
 
        <ImageButton
            android:layout_width="70dp"
@@ -63,6 +63,25 @@
            android:layout_alignParentEnd="true"
            android:layout_alignParentBottom="true"
            />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Model not listed?"
+           android:textSize="18sp"
+           android:id="@+id/textView_model_not_listed"
+           android:layout_below="@+id/year_spinner"
+           android:layout_alignLeft="@+id/problems"
+           android:layout_alignStart="@+id/problems" />
+
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Try it anyway!"
+           android:id="@+id/button_try_anyway"
+           android:layout_below="@+id/textView_model_not_listed"
+           android:layout_alignLeft="@+id/textView_model_not_listed"
+           android:layout_alignStart="@+id/textView_model_not_listed" />
 
 
    </RelativeLayout>

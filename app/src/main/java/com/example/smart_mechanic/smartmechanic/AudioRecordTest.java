@@ -42,7 +42,8 @@ public class AudioRecordTest extends Activity
         }
     }
 
-    private void startPlaying() {
+
+    public void startPlaying() {
         mPlayer = new MediaPlayer();
         try {
             mPlayer.setDataSource(mFileName);
@@ -162,4 +163,6 @@ public class AudioRecordTest extends Activity
             mPlayer = null;
         }
     }
+
+
 }

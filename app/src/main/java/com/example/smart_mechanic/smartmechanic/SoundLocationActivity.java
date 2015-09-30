@@ -14,10 +14,15 @@ import android.widget.ProgressBar;
 
 public class SoundLocationActivity extends ActionBarActivity {
 
+
+    Complex[] fftResult;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sound_location_activity);
+
 
 
         //Set click listener for back button
@@ -39,6 +44,11 @@ public class SoundLocationActivity extends ActionBarActivity {
                //Start the audio record
                 AudioRecordTest audioRecordTest = new AudioRecordTest();
                 audioRecordTest.startRecording();
+
+                //Start recording PCM from the mic
+                //PCMRecord pcmRecord = new PCMRecord();
+               // pcmRecord.StartRecording();
+
                 //Show progress bar for 5000 milliseconds while recording
                 //Pass audioRecordTest to stop recording after post delayed 5 secs
                 ShowProgressBar(5000, audioRecordTest);
@@ -77,7 +87,7 @@ public class SoundLocationActivity extends ActionBarActivity {
 
 
     //FUNCTION TO SHOW A PROGRESS BAR DURING RECORDING
-    void ShowProgressBar(int milliseconds, final AudioRecordTest audioRecordTest) {
+    void ShowProgressBar(int milliseconds, final AudioRecordTest audioRecord) {
         final ProgressBar progressBar = new ProgressBar(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -87,7 +97,6 @@ public class SoundLocationActivity extends ActionBarActivity {
         alert.show();
         Handler handler = new Handler();
         final Intent intent = new Intent(this,SuccessActivity.class);
-
         final Intent recordIntent = new Intent(this, AudioRecordTest.class);
 
 
@@ -97,9 +106,15 @@ public class SoundLocationActivity extends ActionBarActivity {
             public void run() {
 
                 //TODO: Validate successful capture
+                //TODO: Add Delay for DSP
+                //TODO: Determine need to write results to file
                 startActivity(intent);
-                audioRecordTest.stopRecording();
-                alert.dismiss();
+                audioRecord.stopRecording();
+
+
+                //Stop the recoding after the handler
+                //pcmRecord.StopRecording();
+                //pcmRecord.ComplexFFT(fftResult);
 
 
             }

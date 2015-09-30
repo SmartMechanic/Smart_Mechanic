@@ -1,6 +1,7 @@
 package com.example.smart_mechanic.smartmechanic;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -8,22 +9,37 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener
+{
+
+    GoogleApiClient mGoogleApiClient;
+    Location mLastLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
-        //Variable to hide next button
-        boolean hide = true;
+
+        //Build the google API for play services
+        buildGoogleApiClient();
+
+
+
         final ImageButton next = (ImageButton) findViewById(R.id.imageButton_continue);
         next.setVisibility(View.INVISIBLE);
-
+        final Button buttonTryAnyway = (Button) findViewById(R.id.button_try_anyway);
 
         //Populate the makes spinner
         Spinner makes_spinner = (Spinner) findViewById(R.id.make_spinner);
@@ -32,20 +48,46 @@ public class MainActivity extends ActionBarActivity {
                 R.array.makes_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         makes_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        makes_spinner.setAdapter(makes_adapter);
-
 
         //Populate the models spinner
-        Spinner models_spinner = (Spinner) findViewById(R.id.model_spinner);
+        final Spinner models_spinner = (Spinner) findViewById(R.id.model_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> models_adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> ford_models_adapter = ArrayAdapter.createFromResource(MainActivity.this,
                 R.array.models_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-         models_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ford_models_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        models_spinner.setAdapter(models_adapter);
+        models_spinner.setAdapter(ford_models_adapter);
 
+
+        // Apply the adapter to the spinner
+        makes_spinner.setAdapter(makes_adapter);
+        makes_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    //Ford Case
+                    case 1:
+                        // Create an ArrayAdapter using the string array and a default spinner layout
+                        ArrayAdapter<CharSequence> ford_models_adapter = ArrayAdapter.createFromResource(MainActivity.this,
+                                R.array.ford_models_array, android.R.layout.simple_spinner_item);
+                        // Specify the layout to use when the list of choices appears
+                        ford_models_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        // Apply the adapter to the spinner
+                        models_spinner.setAdapter(ford_models_adapter);
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         //Populate the year spinner
@@ -57,14 +99,17 @@ public class MainActivity extends ActionBarActivity {
         years_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         years_spinner.setAdapter(years_adapter);
-
         years_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
+                switch (position) {
 
                     case (1):
                         next.setVisibility(view.VISIBLE);
+                        break;
+
+                    default:
+                        break;
                 }
 
             }
@@ -75,14 +120,23 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
         final Intent intent = new Intent(this, SoundLocationActivity.class);
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-               startActivity(intent);
+                startActivity(intent);
             }
         });
+        buttonTryAnyway.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
@@ -108,5 +162,38 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Set up the Google Play Services API
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+
+    //Callback method for Google API Client
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+
+        Toast.makeText(this, "in onConnected", Toast.LENGTH_LONG);
+        if (mLastLocation != null) {
+
+            Toast.makeText(this,String.valueOf(mLastLocation.getLatitude()), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 }

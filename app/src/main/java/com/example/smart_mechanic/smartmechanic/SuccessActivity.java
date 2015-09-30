@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class SuccessActivity extends ActionBarActivity {
@@ -19,9 +20,8 @@ public class SuccessActivity extends ActionBarActivity {
 
 
 
-
+        //Get reference to find shop button and attach the onClick listener
         Button findShopButton = (Button)findViewById(R.id.button_findShop);
-
         findShopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,8 +30,17 @@ public class SuccessActivity extends ActionBarActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW, shopsURI);
                 intent.setPackage("com.google.android.apps.maps");
                 startActivity(intent);
+            }
+        });
 
 
+        //Get reference to the play button and attach the onClick listener
+        ImageButton buttonPlay = (ImageButton) findViewById(R.id.imageButton_play);
+        buttonPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AudioRecordTest playAudio = new AudioRecordTest();
+                playAudio.startPlaying();
             }
         });
 
