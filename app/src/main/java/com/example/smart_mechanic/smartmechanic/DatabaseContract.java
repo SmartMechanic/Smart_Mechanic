@@ -28,6 +28,20 @@ public final class DatabaseContract {
         public static final String POSITION = "Position";
         public static final String[] ALLCOLUMNS = {_ID,MAKE,MODEL,YEAR,POSITION};
     }
+
+    private static abstract class Fingerprints implements BaseColumns {
+        public static final String TABLE_NAME = "Fingerprints";
+        public static final String _ID = "ID";
+        public static final String CAR_ID = "CAR_ID";
+        public static final String[] FreqCount = {"FC0","FC1","FC2","FC3",
+                "FC4","FC5","FC6","FC7","FC8","FC9","FC10","FC11","FC12","FC13",
+                "FC14","FC15","FC16","FC17","FC18","FC19","FC20","FC21","FC22","FC23",
+                "FC24","FC25","FC26","FC27","FC28","FC29","FC30","FC31","FC32","FC33",
+                "FC34","FC35","FC36","FC37","FC38","FC39","FC40","FC41","FC42","FC43",
+                "FC44","FC45","FC46","FC47"};
+        public static final String shortProblem = "ShortProblem";
+        public static final String longProblem = "LongProblem";
+    }
     private static final String SQL_CREATE_CAR_TABLE =
             "CREATE TABLE " + CarTypeEntries.TABLE_NAME + " (" +
                     CarTypeEntries._ID + " INTEGER PRIMARY KEY," +
@@ -36,10 +50,107 @@ public final class DatabaseContract {
                     CarTypeEntries.YEAR + INT_TYPE + COMMA_SEP +
                     CarTypeEntries.POSITION + INT_TYPE +
                     ");";
+    private static final String SQL_CREATE_FINGERPRINT_TABLE =
+            "CREATE TABLE" + Fingerprints.TABLE_NAME + " (" +
+            Fingerprints._ID + " INTEGER PRIMARY KEY," +
+            Fingerprints.shortProblem + TEXT_TYPE + COMMA_SEP +
+            Fingerprints.longProblem + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[0] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[1] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[2] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[3] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[4] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[5] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[6] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[7] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[8] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[9] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[10] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[11] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[12] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[13] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[14] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[15] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[16] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[17] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[18] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[19] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[20] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[21] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[22] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[23] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[24] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[25] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[26] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[27] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[28] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[29] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[30] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[31] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[32] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[33] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[34] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[35] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[36] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[37] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[38] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[39] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[40] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[41] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[42] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[43] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[44] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[45] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[46] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[47] + TEXT_TYPE + COMMA_SEP +
+            Fingerprints.CAR_ID + " INTEGER, FOREIGN KEY " +
+                    Fingerprints.CAR_ID + " REFERENCES " +
+                    CarTypeEntries.TABLE_NAME + "(" + CarTypeEntries._ID + ")";
 
     private final Context context;
 
     private DatabaseHelper myDBHelper;
+    private SQLiteDatabase db;
+
+    public DatabaseContract(Context ctx){
+        this.context = ctx;
+        myDBHelper = new DatabaseHelper(context);
+    }
+    public DatabaseContract open(){
+        db = myDBHelper.getWritableDatabase();
+        return this;
+    }
+    public void close(){
+        myDBHelper.close();
+    }
+
+    public class DatabaseHelper extends SQLiteOpenHelper{
+        public DatabaseHelper(Context contest){
+            super(context, DATABASE_NAME, null, DBASE_VERSION);
+        }
+        public void onCreate(SQLiteDatabase db){
+            db.execSQL(SQL_CREATE_CAR_TABLE);
+            db.execSQL(SQL_CREATE_FINGERPRINT_TABLE);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+
+        }
+        public Cursor getMakes(){
+            String[] columns = new String[0];
+            columns[0] = CarTypeEntries.MAKE;
+            Cursor c = db.query(CarTypeEntries.TABLE_NAME, columns,null,null,CarTypeEntries.MAKE,null,null);
+            return c;
+        }
+        public Cursor getModels(String Make){
+            String where = CarTypeEntries.MAKE + "=" + Make;
+            String[] columns = new String[0];
+            columns[0] = CarTypeEntries.MODEL;
+            Cursor m = db.query(CarTypeEntries.TABLE_NAME, columns,null,null,null,null,null);
+            return m;
+        }
+    }
 
 
 }
