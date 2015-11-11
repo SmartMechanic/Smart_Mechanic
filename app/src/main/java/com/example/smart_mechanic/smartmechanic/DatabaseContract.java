@@ -55,54 +55,54 @@ public final class DatabaseContract {
             Fingerprints._ID + " INTEGER PRIMARY KEY," +
             Fingerprints.shortProblem + TEXT_TYPE + COMMA_SEP +
             Fingerprints.longProblem + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[0] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[1] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[2] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[3] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[4] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[5] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[6] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[7] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[8] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[9] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[10] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[11] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[12] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[13] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[14] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[15] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[16] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[17] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[18] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[19] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[20] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[21] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[22] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[23] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[24] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[25] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[26] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[27] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[28] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[29] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[30] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[31] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[32] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[33] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[34] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[35] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[36] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[37] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[38] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[39] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[40] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[41] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[42] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[43] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[44] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[45] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[46] + TEXT_TYPE + COMMA_SEP +
-                    Fingerprints.FreqCount[47] + TEXT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[0] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[1] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[2] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[3] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[4] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[5] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[6] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[7] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[8] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[9] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[10] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[11] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[12] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[13] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[14] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[15] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[16] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[17] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[18] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[19] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[20] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[21] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[22] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[23] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[24] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[25] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[26] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[27] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[28] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[29] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[30] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[31] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[32] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[33] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[34] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[35] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[36] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[37] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[38] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[39] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[40] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[41] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[42] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[43] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[44] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[45] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[46] + INT_TYPE + COMMA_SEP +
+                    Fingerprints.FreqCount[47] + INT_TYPE + COMMA_SEP +
             Fingerprints.CAR_ID + " INTEGER, FOREIGN KEY " +
                     Fingerprints.CAR_ID + " REFERENCES " +
                     CarTypeEntries.TABLE_NAME + "(" + CarTypeEntries._ID + ")";
@@ -137,18 +137,47 @@ public final class DatabaseContract {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
 
         }
+
+        //query to get all supported makes for chooser
         public Cursor getMakes(){
             String[] columns = new String[0];
             columns[0] = CarTypeEntries.MAKE;
             Cursor c = db.query(CarTypeEntries.TABLE_NAME, columns,null,null,CarTypeEntries.MAKE,null,null);
             return c;
         }
+
+        //query to get supported models after choosing make
         public Cursor getModels(String Make){
-            String where = CarTypeEntries.MAKE + "=" + Make;
+            String where = CarTypeEntries.MAKE + " = " + Make;
             String[] columns = new String[0];
             columns[0] = CarTypeEntries.MODEL;
             Cursor m = db.query(CarTypeEntries.TABLE_NAME, columns,null,null,null,null,null);
             return m;
+        }
+
+        //query to get unique car id based on make, model, year and recording position
+        public Cursor getCarID(String Make, String Model,int year, int position){
+            Cursor c;
+            String where = CarTypeEntries.MAKE + " = " + Make + ", " +
+                    CarTypeEntries.MODEL + " = " + Model + ", " +
+                    CarTypeEntries.YEAR + " = " + year + ", " +
+                    CarTypeEntries.POSITION + " = " + position;
+            String[] columns = new String[0];
+
+            columns[0] = CarTypeEntries._ID;
+            c = db.query(CarTypeEntries.TABLE_NAME, columns, where, null,null, null,null);
+            return c;
+        }
+
+        //query to get all fingerprints for a specific car and recording position
+        public Cursor getPossibles(int carID){
+            String where = Fingerprints.CAR_ID + " = " + carID;
+            String[] columns = Fingerprints.FreqCount;
+            columns[48] = Fingerprints._ID;
+            columns[49] = Fingerprints.shortProblem;
+            columns[50] = Fingerprints.longProblem;
+            Cursor p = db.query(Fingerprints.TABLE_NAME,columns,where,null,null,null,null);
+            return p;
         }
     }
 
