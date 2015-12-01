@@ -13,11 +13,22 @@
     <string-array name="makes_array">
         <item>Select Make...</item>
         <item>Ford</item>
+        <item>Chevrolet</item>
+        <item>Honda</item>
     </string-array>
 
     <string-array name="ford_models_array">
         <item>Select Model...</item>
         <item>Fusion</item>
+    </string-array>
+
+    <string-array name="chevrolet_models_array">
+        <item>Select Model...</item>
+        <item>Malibu</item>
+    </string-array>
+    <string-array name="honda_models_array">
+        <item>Select Model...</item>
+        <item>Civic</item>
     </string-array>
 
 

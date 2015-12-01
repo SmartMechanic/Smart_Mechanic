@@ -41,6 +41,7 @@ public class SuccessActivity extends ActionBarActivity {
             public void onClick(View v) {
                 AudioRecordTest playAudio = new AudioRecordTest();
                 playAudio.startPlaying();
+
             }
         });
 

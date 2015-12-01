@@ -1,6 +1,7 @@
 package com.example.smart_mechanic.smartmechanic;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,17 +20,30 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 
+
 public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener
 {
 
+
+
+
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
 
-    @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
+
+
+
+        //Get references to the database (global for for use in all classes)
+        DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+        //TODO: WTF IS GOING ON WITH THE CONTEXT OF THE NEW HELPER? NULL
+        SQLiteDatabase dbRead = databaseHelper.getReadableDatabase();
+        SQLiteDatabase dbWrite = databaseHelper.getWritableDatabase();
 
 
         //Build the google API for play services
@@ -62,9 +76,14 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 
         // Apply the adapter to the spinner
         makes_spinner.setAdapter(makes_adapter);
+
+
+        //Set make spinner listener
         makes_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //Populate the models based on the make selected
                 switch (position) {
                     //Ford Case
                     case 1:
@@ -75,8 +94,26 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
                         ford_models_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         // Apply the adapter to the spinner
                         models_spinner.setAdapter(ford_models_adapter);
-
                         break;
+                    //Chevrolet Case
+                    case 2:
+                        // Create an ArrayAdapter using the string array and a default spinner layout
+                        ArrayAdapter<CharSequence> chevrolet_models_adapter = ArrayAdapter.createFromResource(MainActivity.this,
+                                R.array.chevrolet_models_array, android.R.layout.simple_spinner_item);
+                        // Specify the layout to use when the list of choices appears
+                        chevrolet_models_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        // Apply the adapter to the spinner
+                        models_spinner.setAdapter(chevrolet_models_adapter);
+                        break;
+                    case 3:
+                        // Create an ArrayAdapter using the string array and a default spinner layout
+                        ArrayAdapter<CharSequence> honda_models_adapter = ArrayAdapter.createFromResource(MainActivity.this,
+                                R.array.honda_models_array, android.R.layout.simple_spinner_item);
+                        // Specify the layout to use when the list of choices appears
+                        honda_models_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        // Apply the adapter to the spinner
+                        models_spinner.setAdapter(honda_models_adapter);
+                    break;
 
                     default:
                         break;
@@ -99,10 +136,17 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
         years_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         years_spinner.setAdapter(years_adapter);
+
+
+        //TODO: Check the make/model selected and pass as parameters for DSP
         years_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                //TODO: Assign integers to each make/model for switching purposes
                 switch (position) {
+
 
                     case (1):
                         next.setVisibility(view.VISIBLE);
@@ -121,14 +165,18 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
         });
 
 
+        //Intent needed to start the soundLocationActivity
         final Intent intent = new Intent(this, SoundLocationActivity.class);
 
+        //Next button to continue to location selection and to start recording
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 startActivity(intent);
             }
         });
+
+
+        //Try to do the conversion without any make/model selected
         buttonTryAnyway.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

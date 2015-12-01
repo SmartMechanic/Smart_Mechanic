@@ -26,6 +26,7 @@ public class FFT {
     public static Complex[] fft(Complex[] x) {
         int N = x.length;
 
+
         // base case
         if (N == 1) return new Complex[] { x[0] };
 

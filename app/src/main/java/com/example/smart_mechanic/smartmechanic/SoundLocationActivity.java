@@ -10,12 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 
 public class SoundLocationActivity extends ActionBarActivity {
 
 
-    Complex[] fftResult;
+    Complex[] fftResult = new Complex[2048];
 
 
     @Override
@@ -35,33 +38,82 @@ public class SoundLocationActivity extends ActionBarActivity {
             }
         });
 
+
+        final RadioGroup locationGroup = (RadioGroup)findViewById(R.id.radio_button_location);
+
+
+
+
         //Set click listener for microphone button
         ImageButton micButton = (ImageButton)findViewById(R.id.imageButton_start);
         micButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               //Start the audio record
-                AudioRecordTest audioRecordTest = new AudioRecordTest();
-                audioRecordTest.startRecording();
 
-                //Start recording PCM from the mic
-                //PCMRecord pcmRecord = new PCMRecord();
-               // pcmRecord.StartRecording();
+                //Verify that a location from the radio group was selected, if not show a toast
+                if(locationGroup.getCheckedRadioButtonId()==-1){
+                    Toast.makeText(SoundLocationActivity.this,"Please select a location",Toast.LENGTH_LONG).show();
+                }
 
-                //Show progress bar for 5000 milliseconds while recording
-                //Pass audioRecordTest to stop recording after post delayed 5 secs
-                ShowProgressBar(5000, audioRecordTest);
+                //Location was selected so continue with the DSP
+                else {
+                    //Start the audio record
+                    //AudioRecordTest audioRecordTest = new AudioRecordTest();
+                   // audioRecordTest.startRecording();
 
+                    //Start recording PCM from the mic
+                    PCMRecord pcmRecord = new PCMRecord();
+                    pcmRecord.StartRecording();
 
+                    //Show progress bar for 5000 milliseconds while recording
+                    //Pass audioRecordTest to stop recording after post delayed 5 secs
+                    ShowProgressBar(5000, pcmRecord);
 
+                }
 
 
             }
         });
 
 
+
+
+
     }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radioButton_front:
+                if (checked) {
+                    //TODO: LOGIC NEEDED BASED ON DSP
+
+                    //TODO: PASS PARAMS TO DATABASE
+                    break;
+                }
+            case R.id.radioButton_mid:
+                if (checked) {
+                    //TODO: LOGIC NEEDED BASED ON DSP
+
+                    break;
+                }
+            case R.id.radioButton_rear:
+                if(checked) {
+                    //TODO: LOGIC NEEDED BASED ON DSP
+                    break;
+                }
+
+
+
+        }
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,7 +139,7 @@ public class SoundLocationActivity extends ActionBarActivity {
 
 
     //FUNCTION TO SHOW A PROGRESS BAR DURING RECORDING
-    void ShowProgressBar(int milliseconds, final AudioRecordTest audioRecord) {
+    void ShowProgressBar(int milliseconds, final PCMRecord audioRecord) {
         final ProgressBar progressBar = new ProgressBar(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -108,13 +160,18 @@ public class SoundLocationActivity extends ActionBarActivity {
                 //TODO: Validate successful capture
                 //TODO: Add Delay for DSP
                 //TODO: Determine need to write results to file
+
+
+
                 startActivity(intent);
                 audioRecord.stopRecording();
 
 
                 //Stop the recoding after the handler
                 //pcmRecord.StopRecording();
-                //pcmRecord.ComplexFFT(fftResult);
+                audioRecord.ComplexFFT(fftResult);
+
+
 
 
             }
